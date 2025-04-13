@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using ToDoListApp.Data;
 using ToDoListApp.DTO;
 using System.Collections.Generic;
+using ToDoListApp.Models;
 using Microsoft.EntityFrameworkCore;
 using ToDoListApp.Interface;
-using ToDoListApp.Models;
 
 namespace ToDoListApp.Controllers;
 
