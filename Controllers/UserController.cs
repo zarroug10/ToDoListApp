@@ -3,9 +3,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ToDoListApp.DTO;
 using Microsoft.EntityFrameworkCore;
+using ToDoListApp.Interface;
 using System.Collections.Generic;
 using ToDoListApp.Data;
-using ToDoListApp.Interface;
 using ToDoListApp.Models;
 
 namespace ToDoListApp.Controllers;
