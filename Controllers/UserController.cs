@@ -1,10 +1,10 @@
 ﻿using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ToDoListApp.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using ToDoListApp.Data;
-using ToDoListApp.DTO;
 using ToDoListApp.Interface;
 using ToDoListApp.Models;
 
