@@ -12,7 +12,7 @@ public interface IToDoRepository
 
     Task AddItem(CreateItemDTO item);
 
-    void UpdateItem(ToDoItems item);
+    Task UpdateItem(ToDoItems item);
 
     Task DeleteItem(string Id);
     Task<string> Reminder();

@@ -30,17 +30,22 @@ public class ToDoItemController(IToDoRepository toDoRepository, IMapper mapper) 
     [HttpPut("item/{itemId?}")]
     public async Task<IActionResult> UpdateItem(string? itemId, UpdateItemRequest updateItem)
     {
-        var item = await toDoRepository.GetItemById(itemId);
+        try
+        {
+            var item = await toDoRepository.GetItemById(itemId);
 
-        if (item == null) return NotFound("Item is not found");
+            if (item == null) return NotFound("Item is not found");
 
-        mapper.Map(updateItem, item);
+            mapper.Map(updateItem, item);
 
-        toDoRepository.UpdateItem(item);
-
-        if (!await toDoRepository.Save()) return BadRequest("Error While Saving");
-
-        return NoContent();
+            await toDoRepository.UpdateItem(item);
+            
+            return NoContent();
+        }
+       catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpDelete("item/delete/{itemId?}")]

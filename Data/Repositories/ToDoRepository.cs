@@ -9,43 +9,36 @@ using ToDoListApp.Models;
 
 namespace ToDoListApp.Data.Repositories;
 
-public class ToDoRepository(DataContext dataContext, IMapper mapper) : IToDoRepository
+public class ToDoRepository(DataContext dataContext, IMapper mapper,IRepository<ToDoItems> repository) : IToDoRepository
 {
     public async Task<ToDoItems> GetItemById(string Id)
-    {
-        IQueryable<ToDoItems> item = dataContext.ToDoItems
-                                    .AsNoTracking()
-                                    .Where(i => i.Id.ToString() == Id);
-        return await item.FirstOrDefaultAsync(); 
+    { 
+        return await repository.GetByIdAsync(Id);
     }
 
     public async Task<IEnumerable<ItemsDTO>> GetItemsByUserId(string UserId) 
     {
-        var item = await dataContext.ToDoItems
-                                    .AsNoTracking()
-                                    .Where(i => i.AppUserId.ToString() == UserId)
-                                    .ProjectTo<ItemsDTO>(mapper.ConfigurationProvider)
-                                    .ToListAsync();
-        return item;
+    return repository.GetAllAsync().Result
+        .Where(x => x.AppUserId.ToString() == UserId)
+        .ProjectTo<ItemsDTO>(mapper.ConfigurationProvider)
+        .ToList();
     }
 
-    public void  UpdateItem(ToDoItems item)
+    public async Task  UpdateItem(ToDoItems item)
     {
-       dataContext.Entry(item).State = EntityState.Modified;
+      await repository.Updatey(item);
     }
 
     public async Task AddItem(CreateItemDTO item)
     {
         var ToDO = mapper.Map<ToDoItems>(item);
-         await dataContext.ToDoItems.AddAsync(ToDO);
+         await repository.AddAsync(ToDO);
         await dataContext.SaveChangesAsync();
     }
 
     public async Task DeleteItem(string Id)
     {
-        var item = dataContext.ToDoItems.Find(Id);
-        dataContext.ToDoItems.Remove(dataContext.ToDoItems.Find(Id));
-        await dataContext.SaveChangesAsync();
+        await repository.Delete(Id);
     }
 
     public async Task<string> Reminder()

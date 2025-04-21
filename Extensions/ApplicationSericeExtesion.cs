@@ -11,6 +11,7 @@ public static class ApplicationSericeExtesion
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IToDoRepository, ToDoRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         return services;
     }
 }

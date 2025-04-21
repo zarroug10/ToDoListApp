@@ -20,13 +20,15 @@ builder.Services.AddSwaggerGen();
 
 // Register application services and repositories
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddApplicationServices();
-
-// Configure database context with retry on failure and sensitive data logging in development
+// Configure database context
 builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         sql => sql.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null))
         .EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
+
+// Register application services and repositories (AFTER DbContext is registered)
+builder.Services.AddApplicationServices();
+
 
 // Configure Identity services for authentication and authorization
 builder.Services.AddIdentity<AppUser, AppRole>(opt =>

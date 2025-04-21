@@ -9,16 +9,17 @@ using ToDoListApp.Models;
 
 namespace ToDoListApp.Data.Repositories;
 
-public class UserRepository(DataContext dataContext, IMapper mapper) : IUserRepository
+public class UserRepository(DataContext dataContext, IMapper mapper ) : IUserRepository
 {
     public async Task<IEnumerable<AppUser>> GetALlUsers(string Search)
     {
-        var Filteredusers = await dataContext.Users.Where(x=> x.UserName.Contains(Search) 
+        var Filteredusers = await dataContext.Users.AsNoTracking()
+                                                   .Where(x=> x.UserName.Contains(Search) 
                                                       || x.Email.Contains(Search)
                                                       || x.Age.ToString().Contains(Search)
                                                       || x.Cin.ToString().Contains(Search))
-                                                      .Include(x=>x.Items)
-                                                      .AsNoTracking()
+                                                    .Include(x=>x.Items)
+                                                      
                                      //.ProjectTo<AppUser>(mapper.ConfigurationProvider)
                                      .ToListAsync();
 
