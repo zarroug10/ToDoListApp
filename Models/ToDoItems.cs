@@ -1,4 +1,6 @@
-﻿namespace ToDoListApp.Models;
+﻿using ToDoListApp.DTO.Enum;
+
+namespace ToDoListApp.Models;
 
 public class ToDoItems
 {
@@ -7,7 +9,7 @@ public class ToDoItems
     public string? Description { get; set; }
     public DateTime Deadline { get; set; }
     public bool IsCompleted { get; set; }
-
+    public Status Status { get; set; } = Status.InProgress;
     public Guid AppUserId { get; set; }
     public AppUser? AppUser { get; set; }
 }

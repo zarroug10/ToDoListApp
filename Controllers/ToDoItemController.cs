@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ToDoListApp.Data.Repositories;
 using ToDoListApp.DTO;
+using ToDoListApp.DTO.Enum;
+using ToDoListApp.Extensions;
 using ToDoListApp.Interface;
 
 namespace ToDoListApp.Controllers;
@@ -45,6 +48,17 @@ public class ToDoItemController(IToDoRepository toDoRepository, IMapper mapper) 
     {
         await toDoRepository.DeleteItem(itemId);
         return NoContent();
+    }
+
+    [HttpPut("{id}/status-update")]
+    public async Task<IActionResult> StatusUpdate(string id)
+    {
+        var item = await  toDoRepository.StatusUpdate(id);
+        if (item == null)
+        {
+            return NotFound(new { Message = "Item not found" });
+        }
+        return Ok(item);
     }
 }
     

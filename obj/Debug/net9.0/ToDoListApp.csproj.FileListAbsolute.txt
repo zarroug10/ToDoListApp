@@ -171,4 +171,5 @@ C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net9.
 C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net9.0\ref\ToDoListApp.dll
 C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\bin\Debug\net9.0\System.Formats.Asn1.dll
 C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\bin\Debug\net9.0\System.Text.Json.dll
+C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net9.0\ToDoListApp.sourcelink.json
 C:\Users\AbdelhafidhZARROUG\source\repos\ToDoListApp\ToDoListApp\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Reflection.Emit;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ToDoListApp.Models;
 
@@ -30,5 +31,9 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<AppUser, 
             .HasForeignKey(e=> e.AppUserId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<ToDoItems>()
+            .Property(t => t.Status)
+            .HasConversion<string>();
     }
 }

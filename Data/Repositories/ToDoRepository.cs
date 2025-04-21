@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using ToDoListApp.DTO;
+using ToDoListApp.DTO.Enum;
 using ToDoListApp.Interface;
 using ToDoListApp.Models;
 
@@ -81,4 +82,29 @@ public class ToDoRepository(DataContext dataContext, IMapper mapper) : IToDoRepo
         return saved > 0;
     }
 
+    public async Task<ItemsDTO> StatusUpdate(string id)
+    {
+        var item = await dataContext.ToDoItems.FirstOrDefaultAsync(i => i.Id.ToString() == id);
+
+        if (item == null) return null;
+
+        if (item.Deadline < DateTime.Now && item.IsCompleted == false)
+        {
+            item.Status = Status.Expired;
+        }
+        else if (item.Deadline > DateTime.Now)
+        {
+            item.Status = Status.InProgress;
+        }
+        else // Extremely rare case
+        {
+            item.Status = Status.Completed;
+        }
+
+        // Save changes to the DB
+        await dataContext.SaveChangesAsync();
+
+        // Map to DTO after update
+        return mapper.Map<ItemsDTO>(item);
+    }
 }

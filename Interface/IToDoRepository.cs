@@ -17,5 +17,5 @@ public interface IToDoRepository
     Task DeleteItem(string Id);
     Task<string> Reminder();
     Task<bool> Save();
-
+    Task<ItemsDTO> StatusUpdate(string Id);
 }

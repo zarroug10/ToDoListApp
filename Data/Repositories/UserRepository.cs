@@ -11,7 +11,7 @@ namespace ToDoListApp.Data.Repositories;
 
 public class UserRepository(DataContext dataContext, IMapper mapper) : IUserRepository
 {
-    public async Task<IEnumerable<UserDTO>> GetALlUsers(string Search)
+    public async Task<IEnumerable<AppUser>> GetALlUsers(string Search)
     {
         var Filteredusers = await dataContext.Users.Where(x=> x.UserName.Contains(Search) 
                                                       || x.Email.Contains(Search)
@@ -19,11 +19,11 @@ public class UserRepository(DataContext dataContext, IMapper mapper) : IUserRepo
                                                       || x.Cin.ToString().Contains(Search))
                                                       .Include(x=>x.Items)
                                                       .AsNoTracking()
-                                     .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                                     //.ProjectTo<AppUser>(mapper.ConfigurationProvider)
                                      .ToListAsync();
 
         var users = await dataContext.Users.AsNoTracking()
-                                           .ProjectTo<UserDTO>(mapper.ConfigurationProvider)
+                                           //.ProjectTo<AppUser>(mapper.ConfigurationProvider)
                                            .ToListAsync();
         return Search == null ? users: Filteredusers;
     }

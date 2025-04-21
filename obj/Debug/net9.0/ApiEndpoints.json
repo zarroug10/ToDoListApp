@@ -43,6 +43,22 @@
   },
   {
     "ContainingType": "ToDoListApp.Controllers.ToDoItemController",
+    "Method": "StatusUpdate",
+    "RelativePath": "api/ToDoItem/{id}/status-update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoListApp.Controllers.ToDoItemController",
     "Method": "UpdateItem",
     "RelativePath": "api/ToDoItem/item/{itemId}",
     "HttpMethod": "PUT",

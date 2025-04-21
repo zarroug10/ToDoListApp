@@ -10,6 +10,7 @@ using ToDoListApp.DTO;
 using ToDoListApp.Data;
 using ToDoListApp.Interface;
 using ToDoListApp.Models;
+using ToDoListApp.Extensions;
 
 namespace ToDoListApp.Controllers;
 
@@ -21,6 +22,8 @@ public class UserController(IUserRepository userRepository,IMapper mapper, DataC
     [HttpGet]
     public async Task<IActionResult> GetUsers(string? Search)
     {
+        string text = "1245";
+        Console.WriteLine(text.GetValue<int>());
         try 
         { 
         var users = await userRepository.GetALlUsers(Search);

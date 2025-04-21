@@ -5,7 +5,7 @@ namespace ToDoListApp.Interface;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<UserDTO>> GetALlUsers(string Search);
+    Task<IEnumerable<AppUser>> GetALlUsers(string Search);
 
     Task<AppUser> GetUserById(string UserId);
 
