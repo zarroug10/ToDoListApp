@@ -1,8 +1,8 @@
 using AutoMapper;
+using ToDoListApp.DTO;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-using ToDoListApp.DTO;
 using ToDoListApp.Models;
 
 namespace ToDoListApp.Controllers;
